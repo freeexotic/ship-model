@@ -28,6 +28,7 @@ void MapGrid::paint(Orentation* orentation, QPainter* painter){
             }
         }
     }
+    // отрисовка тоникх линий сцены
 
     if (_GridShape>0){
         color.setAlpha(64);
@@ -38,6 +39,7 @@ void MapGrid::paint(Orentation* orentation, QPainter* painter){
             }
         }
     }
+    // отрисовка толстых линий сцены
 }
 
 
@@ -52,6 +54,7 @@ void MapGrid::DrawLine(Orentation* orentation, QPainter* painter, const int size
     painter->drawLine(p3, p4);
 }
 
-
+// Отрисовка линий
+// toPoint() - перевод из QPointF в QPoint
 
 

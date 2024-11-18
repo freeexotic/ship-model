@@ -10,9 +10,10 @@ MainWindow::MainWindow(QWidget *parent):
 {
 
     _mapinterface->AppendObject(_mapgrid);
+
     setCentralWidget(_mapinterface.get());
+
+
     QMenu* settingMenu = menuBar()->addMenu("File");
     settingMenu->addAction("Quit", this, &MainWindow::close, QKeySequence::Quit);
-
-
 }
