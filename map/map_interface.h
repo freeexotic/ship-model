@@ -23,14 +23,21 @@ public:
     void PrintObject();
     void paintEvent(QPaintEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
-
+    void mouseReleaseEvent(QMouseEvent* const event);
+    void wheelEvent(QWheelEvent* const event);
+    void mousePressEvent(QMouseEvent* const event);
 
 private:
     QList<std::shared_ptr<SceneObject>> _objects;
-    Orentation orentation;
+    Orentation orentation_;
 
     void resetting();
 
+    double zoom_;
+    double rotation_;
+
+    QPointF toehold;
+    Local2d start_p;
 };
 
 

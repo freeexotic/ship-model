@@ -7,7 +7,10 @@
 class Orentation
 {
 public:
-    Orentation(const Local2d& origin = Local2d(), const QPointF& start = QPointF(), int rotation = 0 , int zoom = 0);
+    Orentation(const Local2d& origin = Local2d(),
+               const QPointF& start = QPointF(),
+               int rotation = 0 ,
+               int zoom = 0);
 
     QPointF toQPoint (const Local2d& point); // преобразование к экранным координатам
     Local2d toLocal (const QPointF& point); // преобразование к локальным координатам

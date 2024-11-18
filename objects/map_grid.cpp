@@ -10,7 +10,7 @@ MapGrid::MapGrid(const int shape,const QColor color, QObject *parent) : SceneObj
 }
 
 
-void MapGrid::paint(QPainter* painter){
+void MapGrid::paint(Orentation* orentation, QPainter* painter){
     painter->setBrush(Qt::NoBrush);
 
     int segment_lenth = 80;
@@ -22,9 +22,9 @@ void MapGrid::paint(QPainter* painter){
     if (_GridShape>0){
         color.setAlpha(20);
         painter->setPen(color);
-        for(int i = 0; i!=size; i++){
+        for(int i = -size; i<=size; i++){
             if(i%segment_lenth != 0 && i%_GridShape==0){
-                DrawLine(painter,size, i);
+                DrawLine(orentation, painter,size, i);
             }
         }
     }
@@ -32,9 +32,9 @@ void MapGrid::paint(QPainter* painter){
     if (_GridShape>0){
         color.setAlpha(64);
         painter->setPen(color);
-        for(int i = 0; i != size ; i++){
+        for(int i = -size; i <= size ; i++){
             if(i%segment_lenth == 0 || i ==0 || i == size){
-                DrawLine(painter,size, i);
+                DrawLine(orentation, painter,size, i);
             }
         }
     }
@@ -43,14 +43,13 @@ void MapGrid::paint(QPainter* painter){
 
 
 
-void MapGrid::DrawLine(QPainter* painter, const int size, const int i){
-    const QPointF p1 = QPointF(i, size);
-    const QPointF p2 = QPointF(i, 0);
-    const QPointF p3 = QPointF(0, i);
-    const QPointF p4 = QPointF(size, i);
-
-    painter->drawLine(p1,p2);
-    painter->drawLine(p3,p4);
+void MapGrid::DrawLine(Orentation* orentation, QPainter* painter, const int size, const int i){
+    const auto p1 = orentation->toQPoint(1.0 * Local2d(i, size)).toPoint();
+    const auto p2 = orentation->toQPoint(1.0 * Local2d(i, -size)).toPoint();
+    const auto p3 = orentation->toQPoint(1.0 * Local2d(size, i)).toPoint();
+    const auto p4 = orentation->toQPoint(1.0 * Local2d(-size, i)).toPoint();
+    painter->drawLine(p1, p2);
+    painter->drawLine(p3, p4);
 }
 
 
