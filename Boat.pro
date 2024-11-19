@@ -26,7 +26,8 @@ SOURCES += \
     map/map_interface.cpp \
     map/orentation.cpp \
     map/scene_object.cpp \
-    objects/map_grid.cpp
+    objects/map_grid.cpp \
+    objects/pool_object.cpp
 
 HEADERS += \
     functions/global_2d.h \
@@ -37,7 +38,8 @@ HEADERS += \
     map/map_interface.h \
     map/orentation.h \
     map/scene_object.h \
-    objects/map_grid.h
+    objects/map_grid.h \
+    objects/pool_object.h
 
 FORMS += \
     mainwindow.ui
