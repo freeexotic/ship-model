@@ -30,7 +30,7 @@ Polar2d Global2d::transition(const Global2d& rhs) const
     wgs.Inverse(_latitude, _longitude, rhs.latitude(), rhs.longitude(), s12, azi1, azi2);
     return Polar2d(Math::deg2rad(azi1), s12);
 }
-// From Global2d to Polar2d
+// Оперделяет азимут и расстояние между 1 и 2 точкой (возвращает Polar2d)
 
 Global2d Global2d::transit(const Polar2d& transition) const
 {
@@ -42,7 +42,7 @@ Global2d Global2d::transit(const Polar2d& transition) const
     return Global2d(lat2, lon2);
 
 }
-// From  Polar2d to Global2d
+// определяет новую точку Global2d исходя из Polar2d
 
 QDebug operator <<(QDebug debug, const Global2d& rhs)
 {
