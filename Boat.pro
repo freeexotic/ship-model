@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,6 +26,9 @@ SOURCES += \
     map/map_interface.cpp \
     map/orentation.cpp \
     map/scene_object.cpp \
+    objects/boat/boat_model.cpp \
+    objects/boat/boat_obj.cpp \
+    objects/boat/controller_boat.cpp \
     objects/map_grid.cpp \
     objects/pool_object.cpp
 
@@ -38,6 +41,9 @@ HEADERS += \
     map/map_interface.h \
     map/orentation.h \
     map/scene_object.h \
+    objects/boat/boat_model.h \
+    objects/boat/boat_obj.h \
+    objects/boat/controller_boat.h \
     objects/map_grid.h \
     objects/pool_object.h
 

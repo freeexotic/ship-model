@@ -61,10 +61,15 @@ SOURCES       = ../../functions/global_2d.cpp \
 		../../map/map_interface.cpp \
 		../../map/orentation.cpp \
 		../../map/scene_object.cpp \
+		../../objects/boat/boat_model.cpp \
+		../../objects/boat/boat_obj.cpp \
+		../../objects/boat/controller_boat.cpp \
 		../../objects/map_grid.cpp \
 		../../objects/pool_object.cpp moc_mainwindow.cpp \
 		moc_map_interface.cpp \
 		moc_scene_object.cpp \
+		moc_boat_model.cpp \
+		moc_boat_obj.cpp \
 		moc_map_grid.cpp \
 		moc_pool_object.cpp
 OBJECTS       = global_2d.o \
@@ -76,11 +81,16 @@ OBJECTS       = global_2d.o \
 		map_interface.o \
 		orentation.o \
 		scene_object.o \
+		boat_model.o \
+		boat_obj.o \
+		controller_boat.o \
 		map_grid.o \
 		pool_object.o \
 		moc_mainwindow.o \
 		moc_map_interface.o \
 		moc_scene_object.o \
+		moc_boat_model.o \
+		moc_boat_obj.o \
 		moc_map_grid.o \
 		moc_pool_object.o
 DIST          = ../../anotation.md \
@@ -201,6 +211,9 @@ DIST          = ../../anotation.md \
 		../../map/map_interface.h \
 		../../map/orentation.h \
 		../../map/scene_object.h \
+		../../objects/boat/boat_model.h \
+		../../objects/boat/boat_obj.h \
+		../../objects/boat/controller_boat.h \
 		../../objects/map_grid.h \
 		../../objects/pool_object.h ../../functions/global_2d.cpp \
 		../../functions/local_2d.cpp \
@@ -211,6 +224,9 @@ DIST          = ../../anotation.md \
 		../../map/map_interface.cpp \
 		../../map/orentation.cpp \
 		../../map/scene_object.cpp \
+		../../objects/boat/boat_model.cpp \
+		../../objects/boat/boat_obj.cpp \
+		../../objects/boat/controller_boat.cpp \
 		../../objects/map_grid.cpp \
 		../../objects/pool_object.cpp
 QMAKE_TARGET  = Boat
@@ -458,8 +474,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../functions/global_2d.h ../../functions/local_2d.h ../../functions/math.h ../../functions/polar_2d.h ../../mainwindow.h ../../map/map_interface.h ../../map/orentation.h ../../map/scene_object.h ../../objects/map_grid.h ../../objects/pool_object.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../functions/global_2d.cpp ../../functions/local_2d.cpp ../../functions/math.cpp ../../functions/polar_2d.cpp ../../main.cpp ../../mainwindow.cpp ../../map/map_interface.cpp ../../map/orentation.cpp ../../map/scene_object.cpp ../../objects/map_grid.cpp ../../objects/pool_object.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../functions/global_2d.h ../../functions/local_2d.h ../../functions/math.h ../../functions/polar_2d.h ../../mainwindow.h ../../map/map_interface.h ../../map/orentation.h ../../map/scene_object.h ../../objects/boat/boat_model.h ../../objects/boat/boat_obj.h ../../objects/boat/controller_boat.h ../../objects/map_grid.h ../../objects/pool_object.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../functions/global_2d.cpp ../../functions/local_2d.cpp ../../functions/math.cpp ../../functions/polar_2d.cpp ../../main.cpp ../../mainwindow.cpp ../../map/map_interface.cpp ../../map/orentation.cpp ../../map/scene_object.cpp ../../objects/boat/boat_model.cpp ../../objects/boat/boat_obj.cpp ../../objects/boat/controller_boat.cpp ../../objects/map_grid.cpp ../../objects/pool_object.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../mainwindow.ui $(DISTDIR)/
 
 
@@ -492,9 +508,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++1z -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_map_interface.cpp moc_scene_object.cpp moc_map_grid.cpp moc_pool_object.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_map_interface.cpp moc_scene_object.cpp moc_boat_model.cpp moc_boat_obj.cpp moc_map_grid.cpp moc_pool_object.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_map_interface.cpp moc_scene_object.cpp moc_map_grid.cpp moc_pool_object.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_map_interface.cpp moc_scene_object.cpp moc_boat_model.cpp moc_boat_obj.cpp moc_map_grid.cpp moc_pool_object.cpp
 moc_mainwindow.cpp: ../../mainwindow.h \
 		../../objects/map_grid.h \
 		../../map/scene_object.h \
@@ -503,6 +519,7 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		../../functions/local_2d.h \
 		../../functions/math.h \
 		../../objects/pool_object.h \
+		../../functions/global_2d.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
@@ -527,6 +544,27 @@ moc_scene_object.cpp: ../../map/scene_object.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../map/scene_object.h -o moc_scene_object.cpp
 
+moc_boat_model.cpp: ../../objects/boat/boat_model.h \
+		../../objects/boat/boat_obj.h \
+		../../map/scene_object.h \
+		../../map/map_interface.h \
+		../../map/orentation.h \
+		../../functions/local_2d.h \
+		../../functions/math.h \
+		moc_predefs.h \
+		/usr/bin/moc
+	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../objects/boat/boat_model.h -o moc_boat_model.cpp
+
+moc_boat_obj.cpp: ../../objects/boat/boat_obj.h \
+		../../map/scene_object.h \
+		../../map/map_interface.h \
+		../../map/orentation.h \
+		../../functions/local_2d.h \
+		../../functions/math.h \
+		moc_predefs.h \
+		/usr/bin/moc
+	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../objects/boat/boat_obj.h -o moc_boat_obj.cpp
+
 moc_map_grid.cpp: ../../objects/map_grid.h \
 		../../map/scene_object.h \
 		../../map/map_interface.h \
@@ -543,6 +581,7 @@ moc_pool_object.cpp: ../../objects/pool_object.h \
 		../../map/orentation.h \
 		../../functions/local_2d.h \
 		../../functions/math.h \
+		../../functions/global_2d.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../objects/pool_object.h -o moc_pool_object.cpp
@@ -593,7 +632,8 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		../../map/orentation.h \
 		../../functions/local_2d.h \
 		../../functions/math.h \
-		../../objects/pool_object.h
+		../../objects/pool_object.h \
+		../../functions/global_2d.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
@@ -603,7 +643,8 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../map/orentation.h \
 		../../functions/local_2d.h \
 		../../functions/math.h \
-		../../objects/pool_object.h
+		../../objects/pool_object.h \
+		../../functions/global_2d.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
 
 map_interface.o: ../../map/map_interface.cpp ../../map/map_interface.h \
@@ -625,6 +666,26 @@ scene_object.o: ../../map/scene_object.cpp ../../map/scene_object.h \
 		../../functions/math.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scene_object.o ../../map/scene_object.cpp
 
+boat_model.o: ../../objects/boat/boat_model.cpp ../../objects/boat/boat_model.h \
+		../../objects/boat/boat_obj.h \
+		../../map/scene_object.h \
+		../../map/map_interface.h \
+		../../map/orentation.h \
+		../../functions/local_2d.h \
+		../../functions/math.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boat_model.o ../../objects/boat/boat_model.cpp
+
+boat_obj.o: ../../objects/boat/boat_obj.cpp ../../objects/boat/boat_obj.h \
+		../../map/scene_object.h \
+		../../map/map_interface.h \
+		../../map/orentation.h \
+		../../functions/local_2d.h \
+		../../functions/math.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boat_obj.o ../../objects/boat/boat_obj.cpp
+
+controller_boat.o: ../../objects/boat/controller_boat.cpp ../../objects/boat/controller_boat.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controller_boat.o ../../objects/boat/controller_boat.cpp
+
 map_grid.o: ../../objects/map_grid.cpp ../../objects/map_grid.h \
 		../../map/scene_object.h \
 		../../map/map_interface.h \
@@ -638,7 +699,9 @@ pool_object.o: ../../objects/pool_object.cpp ../../objects/pool_object.h \
 		../../map/map_interface.h \
 		../../map/orentation.h \
 		../../functions/local_2d.h \
-		../../functions/math.h
+		../../functions/math.h \
+		../../functions/global_2d.h \
+		../../functions/polar_2d.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pool_object.o ../../objects/pool_object.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
@@ -649,6 +712,12 @@ moc_map_interface.o: moc_map_interface.cpp
 
 moc_scene_object.o: moc_scene_object.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_scene_object.o moc_scene_object.cpp
+
+moc_boat_model.o: moc_boat_model.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_boat_model.o moc_boat_model.cpp
+
+moc_boat_obj.o: moc_boat_obj.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_boat_obj.o moc_boat_obj.cpp
 
 moc_map_grid.o: moc_map_grid.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_map_grid.o moc_map_grid.cpp
