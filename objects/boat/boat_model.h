@@ -3,7 +3,6 @@
 #include "boat_obj.h"
 
 #include<QPointF>
-#include <QVector2D>
 
 
 class BoatModel : public BoatObj
@@ -13,18 +12,36 @@ class BoatModel : public BoatObj
 public:
     explicit BoatModel(QObject* parent = nullptr);
 
-    QVector2D Position() override;
-    QVector2D Rotation() override;
+    Local2d position() override;
+    double rotation() override;
+    Local2d velocity() override;
+    Local2d anglvelocity() override;
+
+    double length() override;
+    double width() override;
+
+    double engine1_trust() override;
+    double engine2_trust() override;
+
+    void set_engine1_trust(double trust_v) override;
+    void set_engine2_trust(double trust_v) override;
+
+    double rudder1Angle() override;
+    double rudder2Angle() override;
+
+
 private:
     double mass_;
     double lenth_;
     double width_;
+    double step_;
+    double density_;
 
-    QVector2D position_; // Экранный координаты корабля
-    QVector2D velocity_; // скорость корабля
+    Local2d position_; // Экранный координаты корабля
+    Local2d velocity_; // скорость корабля
 
-    QVector2D rotation_; // угол показывающий куда повернуть корабль
-    QVector2D anglVelocity_; // угловая скорость
+    double rotation_; // угол показывающий куда повернуть корабль
+    Local2d anglVelocity_; // угловая скорость
 
     double engine1_trust_; // тяга двигателя 1
     double engine2_trust_; // тяга двигателя 2

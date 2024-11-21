@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++1z -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../../../Boat -I. -I../../map -I../../objects -I../../functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I. -I/usr/lib/qt/mkspecs/linux-g++
+INCPATH       = -I../../../Boat -I. -I../../map -I../../objects -I../../functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/lib/qt/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -237,7 +237,7 @@ TARGET        = Boat
 first: all
 ####### Build rules
 
-Boat: ui_mainwindow.h $(OBJECTS)  
+Boat:  $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../../Boat.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mkspecs/features/spec_pre.prf \
@@ -476,7 +476,6 @@ distdir: FORCE
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../functions/global_2d.h ../../functions/local_2d.h ../../functions/math.h ../../functions/polar_2d.h ../../mainwindow.h ../../map/map_interface.h ../../map/orentation.h ../../map/scene_object.h ../../objects/boat/boat_model.h ../../objects/boat/boat_obj.h ../../objects/boat/controller_boat.h ../../objects/map_grid.h ../../objects/pool_object.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../../functions/global_2d.cpp ../../functions/local_2d.cpp ../../functions/math.cpp ../../functions/polar_2d.cpp ../../main.cpp ../../mainwindow.cpp ../../map/map_interface.cpp ../../map/orentation.cpp ../../map/scene_object.cpp ../../objects/boat/boat_model.cpp ../../objects/boat/boat_obj.cpp ../../objects/boat/controller_boat.cpp ../../objects/map_grid.cpp ../../objects/pool_object.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../mainwindow.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -590,20 +589,15 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h
+compiler_uic_make_all:
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h
-ui_mainwindow.h: ../../mainwindow.ui \
-		/usr/bin/uic
-	/usr/bin/uic ../../mainwindow.ui -o ui_mainwindow.h
-
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 

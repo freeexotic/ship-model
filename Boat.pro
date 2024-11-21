@@ -47,8 +47,7 @@ HEADERS += \
     objects/map_grid.h \
     objects/pool_object.h
 
-FORMS += \
-    mainwindow.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
