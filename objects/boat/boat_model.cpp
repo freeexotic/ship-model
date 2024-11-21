@@ -1,5 +1,5 @@
 #include "boat_model.h"
-
+#include "polar_2d.h"
 
 BoatModel::BoatModel(QObject* parent)
     : BoatObj(parent),
@@ -67,7 +67,16 @@ void BoatModel::set_engine2_trust(double trust_v){
     engine2_trust_ = trust_v;
 }
 
+void BoatModel::update_boat(){
+    const Local2d ex = Polar2d(rotation_, 1).local(); // единичный вектора по оси x (по линии носа корабля)
+    const Local2d ey = Polar2d(Math::traverse(rotation_), 1).local(); // единичный вектор перпендикулярный вектору ex
 
+    const double velocityX = ex.dot(velocity_);
+    const double velocityY = ey.dot(velocity_);
+
+    Q_UNUSED(velocityX);
+    Q_UNUSED(velocityY);
+}
 
 
 

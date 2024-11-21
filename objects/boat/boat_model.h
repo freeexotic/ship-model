@@ -28,14 +28,15 @@ public:
 
     double rudder1Angle() override;
     double rudder2Angle() override;
-
+private:
+    void update_boat();
 
 private:
-    double mass_;
-    double lenth_;
-    double width_;
-    double step_;
-    double density_;
+    double mass_; // масса
+    double lenth_; // длина
+    double width_; // ширина
+    double step_; // шаг обновления
+    double density_; // плотность водной среды
 
     Local2d position_; // Экранный координаты корабля
     Local2d velocity_; // скорость корабля
