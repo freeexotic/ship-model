@@ -14,7 +14,7 @@ public:
     virtual Local2d position() = 0;
     virtual double rotation() = 0;
     virtual Local2d velocity() = 0;
-    virtual Local2d anglvelocity() = 0;
+    virtual double anglvelocity() = 0;
 
     virtual double length() = 0;
     virtual double width() = 0;
