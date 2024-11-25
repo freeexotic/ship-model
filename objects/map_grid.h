@@ -11,8 +11,8 @@ public:
     void paint(Orentation* orentation, QPainter* painter) override;
 
 
+
 private:
- //   void DrawGrid(QPainter* painter);
 
     void DrawLine(Orentation* orentation, QPainter* painter, const int size, const int i);
 

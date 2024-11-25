@@ -1,5 +1,8 @@
 #include "boat_model.h"
 #include "polar_2d.h"
+#include <QTimer>
+#include <QDebug>
+
 
 BoatModel::BoatModel(QObject* parent)
     : BoatObj(parent),
@@ -25,7 +28,16 @@ BoatModel::BoatModel(QObject* parent)
     engine2_trust_(0), // тяга двигателя 2
     rudder1Angle_(0), // угол руля 1
     rudder2Angle_(0) // угол руля 2
-{}
+{
+    const auto timer_boat = new QTimer(this);
+    timer_boat->start(200);
+    connect(timer_boat, &QTimer::timeout, this,&BoatModel::update_boat);
+
+    const auto timer_updatepos = new QTimer(this);
+    timer_updatepos->start(300);
+    connect(timer_updatepos, &QTimer::timeout, this, &BoatModel::update_pos);
+}
+
 
 Local2d BoatModel::position(){
     return position_;
@@ -132,7 +144,9 @@ void BoatModel::update_boat(){
     //изменение угла корабля
 }
 
-
+void BoatModel::update_pos(){
+    changed();
+}
 
 
 

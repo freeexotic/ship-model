@@ -5,15 +5,17 @@
 
 MainWindow::MainWindow(QWidget *parent):
     QMainWindow(parent),
-    _mapinterface(std::make_shared<MapInterface>(nullptr)),
-    _mapgrid(std::make_shared<MapGrid>(10, QColor(0, 0, 0), this)),
-    _pool(std::make_shared<pool_object>(center, this))
+    mapinterface_(std::make_shared<MapInterface>(nullptr)),
+    mapgrid_(std::make_shared<MapGrid>(10, QColor(0, 0, 0), this)),
+    pool_(std::make_shared<pool_object>(center, this)),
+    boat_(std::make_shared<BoatModel>())
 {
 
-    _mapinterface->AppendObject(_mapgrid);
-    _mapinterface->AppendObject(_pool);
+    mapinterface_->AppendObject(mapgrid_);
+    mapinterface_->AppendObject(pool_);
+    mapinterface_->AppendObject(boat_);
 
-    setCentralWidget(_mapinterface.get());
+    setCentralWidget(mapinterface_.get());
 
 
     QMenu* settingMenu = menuBar()->addMenu("File");

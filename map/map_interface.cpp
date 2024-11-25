@@ -1,4 +1,15 @@
 #include "map_interface.h"
+#include <QWidget>
+#include <QPainter>
+#include <QObject>
+#include <QMouseEvent>
+#include <memory>
+#include <QDebug>
+#include <QPaintEvent>
+#include <QFontDatabase>
+
+#include "scene_object.h"
+#include "orentation.h"
 
 MapInterface::MapInterface(QWidget* parent) :
     QWidget(parent),
@@ -11,6 +22,12 @@ MapInterface::MapInterface(QWidget* parent) :
 
 void MapInterface::AppendObject(std::shared_ptr<SceneObject> object){
     _objects.append(object);
+    connect(object.get(), &SceneObject::changed, this, [this]()
+    {
+        update();
+        qDebug() << "update";
+
+    }); // [this] - позволяет получить доступ ко всем членам класса
 }
 
 void MapInterface::paintEvent(QPaintEvent* const event){

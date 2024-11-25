@@ -18,5 +18,7 @@ public:
     virtual void move(Orentation* orentation, const QPointF& point);
     virtual bool press(Orentation* orentation, const QPointF& point);
     virtual void release(Orentation* orentation, const QPointF& point);
+
+    Q_SIGNAL void changed();
 };
 

@@ -1,6 +1,8 @@
 #include "map_grid.h"
 #include <QPainter>
 #include <QFontDatabase>
+#include <QDebug>
+#include <QTimer>
 
 
 MapGrid::MapGrid(const int shape,const QColor color, QObject *parent) : SceneObject(parent),
@@ -8,7 +10,6 @@ MapGrid::MapGrid(const int shape,const QColor color, QObject *parent) : SceneObj
     _color(color)
 {
 }
-
 
 void MapGrid::paint(Orentation* orentation, QPainter* painter){
     painter->setBrush(Qt::NoBrush);

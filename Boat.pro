@@ -12,8 +12,8 @@ CONFIG += c++17
 INCLUDEPATH += \
     $$PWD/map \
     $$PWD/objects \
-    $$PWD/functions
-
+    $$PWD/functions \
+    $$PWD/objects/boat
 
 
 SOURCES += \

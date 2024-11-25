@@ -30,6 +30,7 @@ public:
     double rudder2Angle() override;
 private:
     void update_boat();
+    void update_pos();
 
 private:
     const double mass_; // масса

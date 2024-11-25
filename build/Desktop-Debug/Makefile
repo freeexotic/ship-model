@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++1z -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../../../Boat -I. -I../../map -I../../objects -I../../functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/lib/qt/mkspecs/linux-g++
+INCPATH       = -I../../../Boat -I. -I../../map -I../../objects -I../../functions -I../../objects/boat -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/lib/qt/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -519,9 +519,11 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		../../functions/math.h \
 		../../objects/pool_object.h \
 		../../functions/global_2d.h \
+		../../objects/boat/boat_model.h \
+		../../objects/boat/boat_obj.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
+	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/home/freeexotic/Qt_project/Project/Boat/objects/boat -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
 
 moc_map_interface.cpp: ../../map/map_interface.h \
 		../../map/scene_object.h \
@@ -531,7 +533,7 @@ moc_map_interface.cpp: ../../map/map_interface.h \
 		../../functions/math.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../map/map_interface.h -o moc_map_interface.cpp
+	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/home/freeexotic/Qt_project/Project/Boat/objects/boat -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../map/map_interface.h -o moc_map_interface.cpp
 
 moc_scene_object.cpp: ../../map/scene_object.h \
 		../../map/map_interface.h \
@@ -541,7 +543,7 @@ moc_scene_object.cpp: ../../map/scene_object.h \
 		../../functions/math.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../map/scene_object.h -o moc_scene_object.cpp
+	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/home/freeexotic/Qt_project/Project/Boat/objects/boat -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../map/scene_object.h -o moc_scene_object.cpp
 
 moc_boat_model.cpp: ../../objects/boat/boat_model.h \
 		../../objects/boat/boat_obj.h \
@@ -552,7 +554,7 @@ moc_boat_model.cpp: ../../objects/boat/boat_model.h \
 		../../functions/math.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../objects/boat/boat_model.h -o moc_boat_model.cpp
+	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/home/freeexotic/Qt_project/Project/Boat/objects/boat -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../objects/boat/boat_model.h -o moc_boat_model.cpp
 
 moc_boat_obj.cpp: ../../objects/boat/boat_obj.h \
 		../../map/scene_object.h \
@@ -562,7 +564,7 @@ moc_boat_obj.cpp: ../../objects/boat/boat_obj.h \
 		../../functions/math.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../objects/boat/boat_obj.h -o moc_boat_obj.cpp
+	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/home/freeexotic/Qt_project/Project/Boat/objects/boat -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../objects/boat/boat_obj.h -o moc_boat_obj.cpp
 
 moc_map_grid.cpp: ../../objects/map_grid.h \
 		../../map/scene_object.h \
@@ -572,7 +574,7 @@ moc_map_grid.cpp: ../../objects/map_grid.h \
 		../../functions/math.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../objects/map_grid.h -o moc_map_grid.cpp
+	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/home/freeexotic/Qt_project/Project/Boat/objects/boat -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../objects/map_grid.h -o moc_map_grid.cpp
 
 moc_pool_object.cpp: ../../objects/pool_object.h \
 		../../map/scene_object.h \
@@ -583,7 +585,7 @@ moc_pool_object.cpp: ../../objects/pool_object.h \
 		../../functions/global_2d.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../objects/pool_object.h -o moc_pool_object.cpp
+	/usr/bin/moc $(DEFINES) --include /home/freeexotic/Qt_project/Project/Boat/build/Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/freeexotic/Qt_project/Project/Boat -I/home/freeexotic/Qt_project/Project/Boat/map -I/home/freeexotic/Qt_project/Project/Boat/objects -I/home/freeexotic/Qt_project/Project/Boat/functions -I/home/freeexotic/Qt_project/Project/Boat/objects/boat -I/usr/local/include/GeographicLib -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/14.2.1 -I/usr/include/c++/14.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/14.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/14.2.1/include-fixed -I/usr/include ../../objects/pool_object.h -o moc_pool_object.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -627,7 +629,9 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		../../functions/local_2d.h \
 		../../functions/math.h \
 		../../objects/pool_object.h \
-		../../functions/global_2d.h
+		../../functions/global_2d.h \
+		../../objects/boat/boat_model.h \
+		../../objects/boat/boat_obj.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
@@ -638,7 +642,9 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../functions/local_2d.h \
 		../../functions/math.h \
 		../../objects/pool_object.h \
-		../../functions/global_2d.h
+		../../functions/global_2d.h \
+		../../objects/boat/boat_model.h \
+		../../objects/boat/boat_obj.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
 
 map_interface.o: ../../map/map_interface.cpp ../../map/map_interface.h \
@@ -666,7 +672,8 @@ boat_model.o: ../../objects/boat/boat_model.cpp ../../objects/boat/boat_model.h 
 		../../map/map_interface.h \
 		../../map/orentation.h \
 		../../functions/local_2d.h \
-		../../functions/math.h
+		../../functions/math.h \
+		../../functions/polar_2d.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boat_model.o ../../objects/boat/boat_model.cpp
 
 boat_obj.o: ../../objects/boat/boat_obj.cpp ../../objects/boat/boat_obj.h \
