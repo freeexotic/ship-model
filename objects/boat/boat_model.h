@@ -12,7 +12,7 @@ class BoatModel : public BoatObj
 public:
     explicit BoatModel(QObject* parent = nullptr);
 
-    Local2d position() override;
+    Local2d position() const override;
     double rotation() override;
     Local2d velocity() override;
     double anglvelocity() override;
@@ -50,7 +50,7 @@ private:
 
 private:
 
-    Local2d position_; // Экранный координаты корабля
+    Local2d position_; // Экранный координаты корабля и начальный старт
     Local2d velocity_; // скорость корабля
 
     double rotation_; // угол показывающий куда повернуть корабль

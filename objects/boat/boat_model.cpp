@@ -6,40 +6,41 @@
 
 BoatModel::BoatModel(QObject* parent)
     : BoatObj(parent),
-    mass_(1.0),
-    inertion_(0.001),
-    lenth_(2.0),
-    width_(1.0),
-    w_hide_(0.5), // высота корабля над уровнем воды
-    step_(0.0001),
+    mass_(0.5),
+    inertion_(0.01),
+    lenth_(0.06),
+    width_(0.02),
+    w_hide_(0.01), // высота корабля над уровнем воды
+    step_(0.001),
     density_(1000),
-    WresistX_(0),
-    WresistY_(0),
-    WresistZ_(0),
-    Xoffset_(0),
-    Yoffset_(0),
+    WresistX_(0.5),
+    WresistY_(10),
+    WresistZ_(0.03),
+    Xoffset_(0.2),
+    Yoffset_(0.1),
     maxRudderAngle_(Math::deg2rad(30)), // максимальный угол поворота корабля
-    BoundForce_(0), // максимальная скорость корабля
-    position_(Local2d(0,0)), // Экранный координаты корабля
-    velocity_(Local2d(0,0)), // скорость корабля
+    BoundForce_(10), // максимальная скорость корабля
+    position_(Local2d(-1,-5)), // Экранный координаты корабля
+    velocity_(0, 0), // скорость корабля
     rotation_(0), // угол показывающий куда повернуть корабль
     anglVelocity_(0), // угловая скорость
-    engine1_trust_(0), // тяга двигателя 1
-    engine2_trust_(0), // тяга двигателя 2
-    rudder1Angle_(0), // угол руля 1
-    rudder2Angle_(0) // угол руля 2
+    engine1_trust_(1), // тяга двигателя 1
+    engine2_trust_(0.1), // тяга двигателя 2
+    rudder1Angle_(0.5), // угол руля 1
+    rudder2Angle_(0.5) // угол руля 2
 {
     const auto timer_boat = new QTimer(this);
-    timer_boat->start(200);
     connect(timer_boat, &QTimer::timeout, this,&BoatModel::update_boat);
+    timer_boat->start(20);
 
     const auto timer_updatepos = new QTimer(this);
-    timer_updatepos->start(300);
-    connect(timer_updatepos, &QTimer::timeout, this, &BoatModel::update_pos);
+    connect(timer_updatepos, &QTimer::timeout, this, &BoatModel::changed);
+    timer_updatepos->start(30);
 }
 
 
-Local2d BoatModel::position(){
+Local2d BoatModel::position() const
+{
     return position_;
 }
 
@@ -144,9 +145,6 @@ void BoatModel::update_boat(){
     //изменение угла корабля
 }
 
-void BoatModel::update_pos(){
-    changed();
-}
 
 
 

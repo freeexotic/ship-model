@@ -12,7 +12,7 @@ class SceneObject : public QObject
 {
     Q_OBJECT
 public:
-    SceneObject(QObject *parent = nullptr) ;
+    explicit SceneObject(QObject *parent = nullptr) ;
     virtual void paint(Orentation* orentation, QPainter* painter);
 
     virtual void move(Orentation* orentation, const QPointF& point);

@@ -19,7 +19,7 @@ class MapInterface : public QWidget
     Q_OBJECT
 public:
     MapInterface(QWidget* parent = nullptr);
-    void AppendObject(const std::shared_ptr<SceneObject> object);
+    void AppendObject(std::shared_ptr<SceneObject> object);
     void PrintObject();
     void paintEvent(QPaintEvent* event);
     void mouseMoveEvent(QMouseEvent* event);

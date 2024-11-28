@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent):
     mapinterface_(std::make_shared<MapInterface>(nullptr)),
     mapgrid_(std::make_shared<MapGrid>(10, QColor(0, 0, 0), this)),
     pool_(std::make_shared<pool_object>(center, this)),
-    boat_(std::make_shared<BoatModel>())
+    boat_(std::make_shared<BoatModel>(this))
 {
 
     mapinterface_->AppendObject(mapgrid_);
