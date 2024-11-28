@@ -13,7 +13,7 @@ Orentation::Orentation(const Local2d& origin,
     to_.scale(scale, scale); // скалирование
     to_.rotate(rotation); // поворот
     to_.translate(-origin.x(), -origin.y()); // возвращение к изначальной точке
-
+    rotation_ = rotation;
     from_ = to_.inverted(); // создание обратной матрицы для преобразования экранных координат к локальным координатам
 
     scale_ = Math::sqrt(to_.determinant()); // вычисление скалирования

@@ -8,26 +8,27 @@ BoatModel::BoatModel(QObject* parent)
     : BoatObj(parent),
     mass_(0.5),
     inertion_(0.01),
-    lenth_(0.06),
-    width_(0.02),
-    w_hide_(0.01), // высота корабля над уровнем воды
+    lenth_(0.6),
+    width_(0.2),
+    w_hide_(0.012), // высота корабля над уровнем воды
     step_(0.001),
     density_(1000),
     WresistX_(0.5),
     WresistY_(10),
     WresistZ_(0.03),
-    Xoffset_(0.2),
-    Yoffset_(0.1),
+    Xoffset_(0),
+    Yoffset_(0),
     maxRudderAngle_(Math::deg2rad(30)), // максимальный угол поворота корабля
     BoundForce_(10), // максимальная скорость корабля
-    position_(Local2d(-1,-5)), // Экранный координаты корабля
+    maxForce_(10),
+    position_(Local2d(-1,0)), // Экранный координаты корабля
     velocity_(0, 0), // скорость корабля
     rotation_(0), // угол показывающий куда повернуть корабль
     anglVelocity_(0), // угловая скорость
     engine1_trust_(1), // тяга двигателя 1
-    engine2_trust_(0.1), // тяга двигателя 2
-    rudder1Angle_(0.5), // угол руля 1
-    rudder2Angle_(0.5) // угол руля 2
+    engine2_trust_(1), // тяга двигателя 2
+    rudder1Angle_(0.3), // угол руля 1
+    rudder2Angle_(0.3) // угол руля 2
 {
     const auto timer_boat = new QTimer(this);
     connect(timer_boat, &QTimer::timeout, this,&BoatModel::update_boat);
@@ -111,9 +112,9 @@ void BoatModel::update_boat(){
     const double forceAngle2 = rotation_ - maxRudderAngle_ * rudder2Angle_ * (engine2_trust_ >= 0 ? 1.0 : 0.1);
     // Влияние угла руля2 на поворот корабля (где последнее выражение учитывает в какую сторону работает двигатель2)
 
-    const double forceEngine1 = engine1_trust_  * BoundForce_ * ForceEfficacy;
+    const double forceEngine1 = engine1_trust_  * maxForce_ * ForceEfficacy;
     // Величина тяги первого двигателя
-    const double forceEngine2 = engine2_trust_ * BoundForce_ * ForceEfficacy;
+    const double forceEngine2 = engine2_trust_ * maxForce_ * ForceEfficacy;
     // Величина тяги второго двигателя
 
     const Local2d force1 = Polar2d(forceAngle1, forceEngine1).local();

@@ -47,6 +47,7 @@ private:
     const double Yoffset_; // смещение двигателя по оси Y
     const double maxRudderAngle_; // максимальный угол поворота корабля
     const double BoundForce_; // Максимальная скорость корабля
+    const double maxForce_;
 
 private:
 

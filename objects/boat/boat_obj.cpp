@@ -1,16 +1,24 @@
 #include "boat_obj.h"
+#include <QImage>
 
 BoatObj::BoatObj(QObject* parent) : SceneObject(parent) {}
 
 void BoatObj::paint(Orentation* orentation, QPainter* painter){
-   // const double B_rotation = rotation();
-  //  Q_UNUSED(B_rotation);
+    const double B_rotation = rotation();
+    const Local2d B_position = position();
 
-    QColor color_b = QColor(255,0,0);
+    QImage image = QImage("/home/freeexotic/Qt_project/Project/Boat/Texture/boat-2.png");
+    QImage scaledImage = image.scaled(25, 50, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
-   // Local2d position_b = position();
+    Local2d localImageCenter = Local2d(scaledImage.width()/2, scaledImage.height()/2);
+    QPointF ScreenImageCenter = orentation->toQPoint(localImageCenter);
 
-    painter->setPen(color_b);
+    painter->save();
 
-    painter->drawEllipse(orentation->toQPoint(position()), 10, 10);
+    painter->translate(ScreenImageCenter);
+    painter->scale(orentation->scale_, orentation->scale_);
+    painter->rotate(orentation->rotation_ + B_rotation);
+    painter->translate(-ScreenImageCenter.x(), -ScreenImageCenter.y());
+    painter->drawImage(orentation->toQPoint(B_position) - QPoint(scaledImage.width()/2, scaledImage.height()/2), scaledImage);
+    painter->restore();
 } // вся физика берется из boat_model

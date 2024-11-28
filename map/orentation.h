@@ -14,11 +14,12 @@ public:
 
     QPointF toQPoint (const Local2d& point); // преобразование к экранным координатам
     Local2d toLocal (const QPointF& point); // преобразование к локальным координатам
+    double scale_;
+    double rotation_;
 
 private:
     QTransform to_;
     QTransform from_;
-    double scale_;
 };
 
 
