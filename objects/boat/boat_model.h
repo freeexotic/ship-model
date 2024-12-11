@@ -1,8 +1,10 @@
 #pragma once
 
 #include "boat_obj.h"
+#include <mutex>
 
 #include<QPointF>
+#include <QMutex>
 
 
 class BoatModel : public BoatObj
@@ -10,9 +12,9 @@ class BoatModel : public BoatObj
     Q_OBJECT
 
 public:
-    explicit BoatModel(QObject* parent = nullptr);
+    explicit BoatModel(bool img_mode = false, QObject* parent = nullptr);
 
-    Local2d position() const override;
+    Local2d position() override;
     double rotation() override;
     Local2d velocity() override;
     double anglvelocity() override;
@@ -28,6 +30,8 @@ public:
 
     double rudder1Angle() override;
     double rudder2Angle() override;
+
+    bool img_mode() const override;
 private:
     void update_boat();
     void update_pos();
@@ -63,7 +67,11 @@ private:
     double rudder1Angle_; // угол руля 1
     double rudder2Angle_; // угол руля 2w2eqqzew
 
+private:
 
+    std::mutex mutex;
+
+    bool img_mode_ = false;
 };
 
 

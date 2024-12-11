@@ -2,9 +2,10 @@
 #include "polar_2d.h"
 #include <QTimer>
 #include <QDebug>
+#include <QMutex>
+#include <mutex>
 
-
-BoatModel::BoatModel(QObject* parent)
+BoatModel::BoatModel(bool img_mode, QObject* parent)
     : BoatObj(parent),
     mass_(0.5),
     inertion_(0.01),
@@ -16,31 +17,28 @@ BoatModel::BoatModel(QObject* parent)
     WresistX_(0.5),
     WresistY_(10),
     WresistZ_(0.03),
-    Xoffset_(0),
-    Yoffset_(0),
+    Xoffset_(0.6),
+    Yoffset_(0.2),
     maxRudderAngle_(Math::deg2rad(30)), // максимальный угол поворота корабля
-    BoundForce_(10), // максимальная скорость корабля
-    maxForce_(10),
-    position_(Local2d(-1,0)), // Экранный координаты корабля
+    BoundForce_(100), // максимальная скорость корабля
+    maxForce_(100),
+    position_(Local2d(0,0)), // Экранный координаты корабля
     velocity_(0, 0), // скорость корабля
-    rotation_(0), // угол показывающий куда повернуть корабль
+    rotation_(90), // угол показывающий куда повернуть корабль
     anglVelocity_(0), // угловая скорость
     engine1_trust_(1), // тяга двигателя 1
     engine2_trust_(1), // тяга двигателя 2
-    rudder1Angle_(0.3), // угол руля 1
-    rudder2Angle_(0.3) // угол руля 2
-{
-    const auto timer_boat = new QTimer(this);
-    connect(timer_boat, &QTimer::timeout, this,&BoatModel::update_boat);
-    timer_boat->start(20);
-
+    rudder1Angle_(0.001), // угол руля 1
+    rudder2Angle_(0.001), // угол руля 2
+    img_mode_(img_mode) // Отрисовка корабля изображением или с помощью полигона
+{ 
     const auto timer_updatepos = new QTimer(this);
-    connect(timer_updatepos, &QTimer::timeout, this, &BoatModel::changed);
-    timer_updatepos->start(30);
+    connect(timer_updatepos, &QTimer::timeout, this, &BoatModel::update_boat);
+    timer_updatepos->start(1);
 }
 
 
-Local2d BoatModel::position() const
+Local2d BoatModel::position()
 {
     return position_;
 }
@@ -90,7 +88,12 @@ void BoatModel::set_engine2_trust(double trust_v){
     engine2_trust_ = trust_v;
 }
 
+bool BoatModel::img_mode() const{
+    return img_mode_;
+}
+
 void BoatModel::update_boat(){
+    std::unique_lock<std::mutex> lock(mutex, std::defer_lock);
     const Local2d ex = Polar2d(rotation_, 1).local(); // единичный вектора по оси x (по линии носа корабля)
     const Local2d ey = Polar2d(Math::traverse(rotation_), 1).local(); // единичный вектор перпендикулярный вектору ex
 
@@ -139,11 +142,14 @@ void BoatModel::update_boat(){
 
     anglVelocity_ += momentF / inertion_ * step_;
     // Изменение угловой скорости
-
+    lock.lock();
     position_ += velocity_ * step_;
     //изменение позиции корабля
     rotation_ += anglVelocity_ * step_;
     //изменение угла корабля
+    lock.unlock();
+
+    changed();
 }
 
 

@@ -9,7 +9,8 @@ class BoatObj : public SceneObject
 public:
     BoatObj(QObject* parent = nullptr);
 
-    virtual Local2d position() const = 0;
+
+    virtual Local2d position() = 0;
     virtual double rotation() = 0;
     virtual Local2d velocity() = 0;
     virtual double anglvelocity() = 0;
@@ -26,7 +27,11 @@ public:
     virtual double rudder1Angle() = 0;
     virtual double rudder2Angle() = 0;
 
+    virtual bool img_mode() const = 0;
+
 private:
     void paint(Orentation* orentation, QPainter* painter) override;
+    void imgPaint(Orentation* orentation, QPainter* painter);
+    void polyPaint(Orentation* orentation, QPainter* painter);
 };
 
