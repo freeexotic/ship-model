@@ -5,6 +5,7 @@
 #include "map_interface.h"
 #include "pool_object.h"
 #include "boat_model.h"
+#include "controller_boat.h"
 
 #include "global_2d.h"
 
@@ -20,5 +21,6 @@ public:
     std::shared_ptr<MapGrid> mapgrid_;
     std::shared_ptr<pool_object> pool_;
     std::shared_ptr<BoatModel> boat_;
+    std::shared_ptr<BoatController> controller_;
 
 };

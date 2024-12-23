@@ -31,6 +31,9 @@ public:
     double rudder1Angle() override;
     double rudder2Angle() override;
 
+    void set_rudder1_angle(double angle_v) override;
+    void set_rudder2_angle(double angle_v) override;
+
     bool img_mode() const override;
 private:
     void update_boat();

@@ -88,6 +88,14 @@ void BoatModel::set_engine2_trust(double trust_v){
     engine2_trust_ = trust_v;
 }
 
+void BoatModel::set_rudder1_angle(double angle_v){
+    rudder1Angle_ = angle_v;
+}
+
+void BoatModel::set_rudder2_angle(double angle_v){
+    rudder2Angle_ = angle_v;
+}
+
 bool BoatModel::img_mode() const{
     return img_mode_;
 }
@@ -141,14 +149,16 @@ void BoatModel::update_boat(){
     // Закон времени : скорость равна Сила/массу * время + старая скорость
 
     anglVelocity_ += momentF / inertion_ * step_;
-    // Изменение угловой скорости
-    lock.lock();
-    position_ += velocity_ * step_;
-    //изменение позиции корабля
-    rotation_ += anglVelocity_ * step_;
-    //изменение угла корабля
-    lock.unlock();
+    {
+        std::unique_lock<std::mutex> lock(mutex, std::defer_lock);
+        lock.lock();
+        position_ += velocity_ * step_;
+        //изменение позиции корабля
+        rotation_ += anglVelocity_ * step_;
+        //изменение угла корабля
+        lock.unlock();
 
+    } // Изменение угловой скорости
     changed();
 }
 

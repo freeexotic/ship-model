@@ -27,6 +27,9 @@ public:
     virtual double rudder1Angle() = 0;
     virtual double rudder2Angle() = 0;
 
+    virtual void set_rudder1_angle(double angle_v) = 0;
+    virtual void set_rudder2_angle(double angle_v) = 0;
+
     virtual bool img_mode() const = 0;
 
 private:
